@@ -5,9 +5,5 @@
 </template>
 
 <style module>
-.sample
-	color: red
-	user-select: none
-	display: grid
-	background: blue
+@import './app.sss'
 </style>
