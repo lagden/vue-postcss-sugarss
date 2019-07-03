@@ -1,6 +1,6 @@
 # Vue + Postcss + Sugarss
 
-Just a sample
+Just an example.
 
 ## Usage
 
@@ -8,13 +8,7 @@ Just a sample
 npm i
 ```
 
-to build:
-
-```
-npm run build
-```
-
-to run
+and run
 
 ```
 npm start
