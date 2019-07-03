@@ -1,43 +1,70 @@
 const {join} = require('path')
-const {DefinePlugin} = require('webpack')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+// Css Loader Stuff
+const miniCssExtractLoader = {
+	loader: MiniCssExtractPlugin.loader,
+	options: {
+		hmr: false
+	}
+}
+
+const cssLoaderModule = {
+	loader: 'css-loader',
+	options: {
+		import: false,
+		importLoaders: 1,
+		modules: true,
+		onlyLocals: false
+	}
+}
+const cssLoader = {
+	...cssLoaderModule,
+	options: {
+		...cssLoaderModule.options,
+		modules: false,
+		onlyLocals: false
+	}
+}
+
+const postcssLoader = {
+	loader: 'postcss-loader',
+	options: {
+		config: {
+			path: join(__dirname, 'postcss.config.js')
+		}
+	}
+}
+
 module.exports = {
-	entry: './src/main.js',
-	output: {
-		path: join(__dirname, 'dist'),
-		filename: '[name].js'
-	},
+	cache: false,
 	plugins: [
+		new MiniCssExtractPlugin(),
 		new VueLoaderPlugin(),
 		new HTMLWebpackPlugin({
+			title: 'Sample',
 			inject: true,
 			template: join(__dirname, 'index.html')
-		}),
-		new MiniCssExtractPlugin()
+		})
 	],
+	entry: join(__dirname, 'src', 'main.js'),
+	output: {
+		path: join(__dirname, 'public'),
+		filename: '[name].[hash:8].bundle.js',
+		pathinfo: true
+	},
 	module: {
 		rules: [
 			{
 				test: /\.(css|sss)$/,
-				use: [
-					MiniCssExtractPlugin.loader,
+				oneOf: [
 					{
-						loader: 'css-loader',
-						options: {
-							importLoaders: 1,
-							modules: true
-						}
-					},
-					{
-						loader: 'postcss-loader',
-						options: {
-							config: {
-								path: join(__dirname, 'postcss.config.js')
-							}
-						}
+						resourceQuery: /module/,
+						use: [miniCssExtractLoader, cssLoaderModule, postcssLoader]
+					}, {
+						use: [miniCssExtractLoader, cssLoader, postcssLoader]
 					}
 				]
 			}, {
@@ -51,19 +78,14 @@ module.exports = {
 				test: /\.js$/,
 				loader: 'babel-loader',
 				exclude: /node_modules/
-			},
-			{
-				test: /\.(png|jpg|gif|svg)$/,
-				loader: 'file-loader',
-				options: {
-					name: '[name].[ext]?[hash]'
-				}
 			}
 		]
 	},
 	resolve: {
 		alias: {
-			vue$: 'vue/dist/vue.esm.js'
+			vue: 'vue/dist/vue.esm.js',
+			vue$: 'vue/dist/vue.esm.js',
+			'@': join(__dirname, 'src')
 		},
 		extensions: ['*', '.js', '.vue', '.json']
 	}

@@ -1,0 +1,15 @@
+.tag {
+	display: inline-block;
+	border-radius: 1em;
+	padding: 0.3em;
+	font-size: 0.7em;
+	background-color: red;
+}
+
+.tag__blue {
+	background-color: darkblue;
+}
+
+.color {
+	color: white;
+}

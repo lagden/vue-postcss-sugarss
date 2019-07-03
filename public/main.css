@@ -1,0 +1,50 @@
+.JUc4y8RgxM2jyZbVM5Dd3 {
+	display: inline-block;
+	border-radius: 1em;
+	padding: 0.3em;
+	font-size: 0.7em;
+	background-color: red;
+}
+._26jQX6YAakRDW3VULe7NwS {
+	background-color: darkblue;
+}
+._1SUHCIf1HuLDepJnFFNpBS {
+	color: white;
+}
+
+.BMrlkHCCrScF4g4hx121S {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
+	background: blue
+}
+
+._2jRPNDBYIUBPgOv-1PEH1 {
+}
+._2Y6rSMmyokryZ5aUUPsKUc {
+}
+
+.another[data-v-617ab0be] {
+	cursor: pointer;
+}
+.another__green[data-v-617ab0be] {
+		background: green;
+}
+
+html {
+	background-color: black;
+}
+
+body {
+	font-family: sans-serif;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body:after
+	body:before {
+		box-sizing: border-box;
+}
+
